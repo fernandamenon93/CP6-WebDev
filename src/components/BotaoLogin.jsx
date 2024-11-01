@@ -4,7 +4,7 @@ export default function BotaoLogin({ isLogged, handleLogin }) {
             {isLogged && <span className="text-white">Olá, usuário</span>}
             <button 
                 onClick={handleLogin} 
-                className="bg-white text-red-800 px-4 py-1 rounded hover:bg-gray-200">
+                className="bg-white text-red-800 px-4 py-1 rounded hover:bg-black-200">
                 {isLogged ? "Logout" : "Login"}
             </button>
         </div>
