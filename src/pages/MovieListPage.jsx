@@ -31,8 +31,8 @@ export default function MovieListPage() {
   return (
     <>
       <main className="grid grid-cols-4 justify-items-center gap-5">
-        <h2 className="col-span-4 text-2xl font-bold text-center mb-5">
-          Veja o catálogo completo de filmes
+        <h2 className="col-span-4 text-2xl  text-gray font-bold text-center mb-5 ">
+          Veja todos os filmes disponíveis aqui:
         </h2>
         <form className="col-span-4 w-2/4 flex flex-col justify-center gap-2 mb-5">
           <input

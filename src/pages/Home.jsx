@@ -7,8 +7,8 @@ import { FavoritesContext } from "../context/FavoritesContext";
 export default function Home(){
 
     const [popularMovies, setPopularMovies] = useState([]);
-    const [animationMovies, setAnimationMovies] = useState([]);
-    const [scienceFictionMovies, setScienceFictionMovies] = useState([]);
+    const [upcomingMovies, setUpcomingMovies] = useState([]);
+    const [top_ratedMovies, setTop_ratedMovies] = useState([]);
     const [loading, setLoading] = useState(false);
     const { favorites, handleFavorite, isFavorite } = useContext(FavoritesContext);
 
@@ -19,24 +19,24 @@ export default function Home(){
         try{
             //Monta a URL para buscar os filmes populares, animação e ficção científica
             const popularURL = `${BASE_URL}/movie/popular${API_KEY}&language=pt-br&page=1`;
-            const animationURL = `${BASE_URL}/discover/movie${API_KEY}&language=pt-br&with_genres=16`;
-            const scienceFictionURL = `${BASE_URL}/discover/movie${API_KEY}&language=pt-br&with_genres=878`;
+            const upcomingURL = `${BASE_URL}/movie/upcoming${API_KEY}&language=pt-br&with_genres=16`;
+            const top_ratedURL = `${BASE_URL}/movie/top_rated${API_KEY}&language=pt-br&with_genres=878`;
             //Faz a busca dos filmes
-            const [popularResponse, animationResponse, scienceFictionResponse] = await Promise.all([
+            const [popularResponse, upcomingResponse, top_ratedResponse] = await Promise.all([
                 fetch(popularURL),
-                fetch(animationURL),
-                fetch(scienceFictionURL)
+                fetch(upcomingURL),
+                fetch(top_ratedURL)
               ]);
 
             // Converte os resultados para JSON
             const popularData = await popularResponse.json();
-            const upcomingData = await animationResponse.json();
-            const trendingData = await scienceFictionResponse.json();
+            const upcomingData = await upcomingResponse.json();
+            const trendingData = await top_ratedResponse.json();
 
             // Atualiza o estado com os dados recebidos
             setPopularMovies(popularData.results);
-            setAnimationMovies(upcomingData.results);
-            setScienceFictionMovies(trendingData.results);
+            setUpcomingMovies(upcomingData.results);
+            setTop_ratedMovies(trendingData.results);
         }
         catch(error){
             console.error('Erro ao buscar os filmes:', error);
@@ -55,7 +55,7 @@ export default function Home(){
         <>
            {loading ? <p>Carregando...</p>:
         <>
-        <ContainerMovies titulo="Filmes Populares">
+        <ContainerMovies titulo="Filmes Populares:">
         {
             popularMovies
             .map( movie => (
@@ -67,9 +67,9 @@ export default function Home(){
             )
         }
         </ContainerMovies>
-        <ContainerMovies titulo="Animações">
+        <ContainerMovies titulo="Filmes que estão por vir:">
         {
-            animationMovies
+            upcomingMovies
             .map( movie => (
                 <MovieCard
                     key={movie.id} {...movie} 
@@ -79,9 +79,9 @@ export default function Home(){
             )
         }
         </ContainerMovies>
-        <ContainerMovies titulo="Ficção Científica">
+        <ContainerMovies titulo="Mais bem avaliados:">
         {
-            scienceFictionMovies
+            top_ratedMovies
             .map( movie => (
                 <MovieCard
                     key={movie.id} {...movie} 
