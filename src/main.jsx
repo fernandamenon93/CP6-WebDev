@@ -9,11 +9,12 @@ import MovieDetailPage from './pages/MovieDetailPage.jsx'
 import Home from './pages/Home.jsx'
 import GenreList from './pages/GenreList.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
-import Lista from './pages/Lista.jsx'
-import Assistidos from './pages/Assistidos.jsx'
+import Favorites from './pages/Favorites.jsx'
+import Watchlist from './pages/Watchlist.jsx'
 
 import { ThemeProvider } from "@material-tailwind/react";
 import { FavoritesProvider } from './context/FavoritesContext.jsx'
+import { WatchlistProvider } from './context/WatchlistContext.jsx'
 
 
 const router= createBrowserRouter([
@@ -26,8 +27,8 @@ const router= createBrowserRouter([
       {path: '/movies/:id', element: <MovieDetailPage />},
       {path: '/genre', element: <GenreList />},
       {path: '/genre/:genero', element: <MoviesByGenrePage />},
-      {path: '/lista', element: <Lista/>},
-      {path: '/assistidos', element: <Assistidos/>},
+      {path: '/favorites', element: <Favorites/>},
+      {path: '/watchlist', element: <Watchlist/>},
       {path: '*', element: <PageNotFound/>}
     ]
     

@@ -18,6 +18,7 @@ export default function MovieCard({id, title, poster_path, handleFavorite, isFav
                 </button>
               <Link className="py-2 px-3 transition ease-in-out duration-300 bg-red-800 hover:bg-white hover:text-red-800 m-4 text-white rounded-3xl" to={`/movies/${id}`}>Ver detalhes</Link>
         </div>
+        
         </>
     )
 

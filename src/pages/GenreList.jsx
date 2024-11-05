@@ -14,15 +14,20 @@ export default function GenreList(){
 
     return(
         <>
-         <h2 className='col-span-4 text-2xl font-bold text-center mb-5'>Veja os filmes por gênero</h2>
-         <main className='flex flex-wrap gap-10 justify-center'>
+        <h2 className='col-span-4 text-2xl font-bold text-center mb-5'>Veja os filmes por gênero;</h2>
+        <main className='flex flex-wrap gap-2 justify-center'> {/* Reduzindo o gap para 2 */}
         {
             genre.map((genre) => (
-                    <GenreCard key={genre.id} {...genre}/>
-                )
-            )
+                <div className="w-full md:w-1/2 lg:w-1/4" key={genre.id}> {/* Mudança: movi o key para o div */}
+                    <GenreCard {...genre} />
+                </div>
+            ))
         }
         </main>
+
+
+
+
         </>
     )
 }

@@ -6,6 +6,7 @@ import { FavoritesContext } from "../context/FavoritesContext";
 
 export default function Home(){
 
+    const [recomendadosMovies, setrecomendadosMovies] = useState([MovieCard]);
     const [popularMovies, setPopularMovies] = useState([]);
     const [upcomingMovies, setUpcomingMovies] = useState([]);
     const [top_ratedMovies, setTop_ratedMovies] = useState([]);
@@ -18,22 +19,26 @@ export default function Home(){
     const fetchMovies = async () => {
         try{
             //Monta a URL para buscar os filmes populares, animação e ficção científica
+            const recomendadosURL = `${BASE_URL}/movie/recomendados${API_KEY}&language=pt-br&page=1`;
             const popularURL = `${BASE_URL}/movie/popular${API_KEY}&language=pt-br&page=1`;
             const upcomingURL = `${BASE_URL}/movie/upcoming${API_KEY}&language=pt-br&with_genres=16`;
             const top_ratedURL = `${BASE_URL}/movie/top_rated${API_KEY}&language=pt-br&with_genres=878`;
             //Faz a busca dos filmes
-            const [popularResponse, upcomingResponse, top_ratedResponse] = await Promise.all([
+            const [recomendadosResponse, popularResponse, upcomingResponse, top_ratedResponse] = await Promise.all([
+                fetch(recomendadosURL),
                 fetch(popularURL),
                 fetch(upcomingURL),
                 fetch(top_ratedURL)
               ]);
 
             // Converte os resultados para JSON
+            const recomendadosData = await recomendadosResponse.json();
             const popularData = await popularResponse.json();
             const upcomingData = await upcomingResponse.json();
             const trendingData = await top_ratedResponse.json();
 
             // Atualiza o estado com os dados recebidos
+            
             setPopularMovies(popularData.results);
             setUpcomingMovies(upcomingData.results);
             setTop_ratedMovies(trendingData.results);
@@ -55,6 +60,18 @@ export default function Home(){
         <>
            {loading ? <p>Carregando...</p>:
         <>
+        <ContainerMovies titulo="Recomendados Para Você:">
+        {
+            recomendadosMovies
+            .map( movie => (
+                <MovieCard
+                    key={movie.id} {...movie} 
+                    handleFavorite={handleFavorite}
+                    isFavorite={isFavorite(movie)}/>
+                )
+            )
+        }
+        </ContainerMovies>
         <ContainerMovies titulo="Filmes Populares:">
         {
             popularMovies
@@ -74,7 +91,7 @@ export default function Home(){
                 <MovieCard
                     key={movie.id} {...movie} 
                     handleFavorite={handleFavorite}
-                    isFavorite={isFavorite}/>
+                    isFavorite={isFavorite(movie)}/>
                 )
             )
         }
@@ -86,7 +103,7 @@ export default function Home(){
                 <MovieCard
                     key={movie.id} {...movie} 
                     handleFavorite={handleFavorite}
-                    isFavorite={isFavorite}/>
+                    isFavorite={isFavorite(movie)}/>
                 )
             )
         }
