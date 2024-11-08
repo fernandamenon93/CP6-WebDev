@@ -1,11 +1,9 @@
 import { useContext } from 'react';
 import { MoviesContext } from '../context/MoviesContext';
-import { FavoritesContext } from '../context/FavoritesContext';
 import MovieCard from '../components/MovieCard';
 
 export default function WatchedMoviesPage() {
   const { filmesAssistidos } = useContext(MoviesContext);
-  const { handleFavorite, isFavorite } = useContext(FavoritesContext);
 
   return (
     <div className="container mx-auto mt-8">
@@ -18,8 +16,6 @@ export default function WatchedMoviesPage() {
             <MovieCard
               key={filme.id}
               {...filme}
-              handleFavorite={handleFavorite}
-              isFavorite={isFavorite(filme)}
             />
           ))}
         </div>

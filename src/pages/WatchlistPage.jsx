@@ -1,15 +1,9 @@
 import { useContext } from 'react';
 import { MoviesContext } from '../context/MoviesContext';
-import { FavoritesContext } from '../context/FavoritesContext';
 import MovieCard from '../components/MovieCard';
 
-
 export default function WatchlistPage() {
-  const { filmesParaVerDepois, removerFilmeParaVerDepois } = useContext(MoviesContext);
-  const { handleFavorite, isFavorite } = useContext(FavoritesContext);
-
-
-
+  const { filmesParaVerDepois } = useContext(MoviesContext);
 
   return (
     <div className="container mx-auto mt-8">
@@ -19,12 +13,10 @@ export default function WatchlistPage() {
       ) : (
         <div className="flex space-x-4 gap-10 overflow-x-auto p-4 scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800">
           {filmesParaVerDepois.map((filme) => (
-              <MovieCard 
+            <MovieCard 
               key={filme.id}
               {...filme} 
-              handleFavorite={handleFavorite}
-              isFavorite={isFavorite(filme)}
-              />
+            />
           ))}
         </div>
       )}

@@ -4,25 +4,16 @@ import { FaStar, FaCoins } from 'react-icons/fa';
 import { MoviesContext } from '../context/MoviesContext';
 
 export default function MovieDetailPage() {
-  const { id } = useParams(); // Obtendo o ID do filme pela URL
+  const { id } = useParams(); 
   const [movie, setMovie] = useState({});
   const [revenueInBRL, setRevenueInBRL] = useState(null);
   const [trailer, setTrailer] = useState(null);
-  const [credits, setCredits] = useState(null); // Novo estado para dados de crédito
-  const [releaseDates, setReleaseDates] = useState([]); // Novo estado para datas de lançamento no Brasil
+  const [credits, setCredits] = useState(null); 
+  const [releaseDates, setReleaseDates] = useState([]); 
+  const { filmesAssistidos, filmesParaVerDepois, adicionarFilmeAssistido, adicionarFilmeParaVerDepois, removerFilmeAssistido, removerFilmeParaVerDepois, } = useContext(MoviesContext);
+  const exchangeRate = 5;
 
-  const {
-    filmesAssistidos,
-    filmesParaVerDepois,
-    adicionarFilmeAssistido,
-    adicionarFilmeParaVerDepois,
-    removerFilmeAssistido,
-    removerFilmeParaVerDepois,
-  } = useContext(MoviesContext); // Usando o contexto de filmes
-
-  const exchangeRate = 5; // Taxa de câmbio fictícia para conversão de receita
-
-  // Verificar se o filme já está nas listas
+  // Verificar se o filme já tá nas listas
   const jaAssistido = filmesAssistidos.some((f) => f.id === parseInt(id));
   const jaNaWatchlist = filmesParaVerDepois.some((f) => f.id === parseInt(id));
 
@@ -150,14 +141,14 @@ export default function MovieDetailPage() {
                       onClick={() => removerFilmeParaVerDepois(parseInt(id))}
                       className="bg-red-700 text-white py-2 px-4 rounded-lg hover:bg-red-600"
                     >
-                      Remover da Watchlist
+                      Remover da lista
                     </button>
                   ) : (
                     <button
                       onClick={() => adicionarFilmeParaVerDepois(movie)}
                       className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-400"
                     >
-                      Adicionar à Watchlist
+                      Adicionar a Assistir
                     </button>
                   )}
                 </div>

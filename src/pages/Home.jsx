@@ -1,20 +1,16 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ContainerMovies from "../components/ContainerMovies";
 import MovieCard from "../components/MovieCard";
-import { FavoritesContext } from "../context/FavoritesContext";
 
 export default function Home() {
-  const [recomendadosMovies, setRecomendadosMovies] = useState([]); // Inicialize como array vazio
+  const [recomendadosMovies, setRecomendadosMovies] = useState([]);
   const [popularMovies, setPopularMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [top_ratedMovies, setTop_ratedMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { favorites, handleFavorite, isFavorite } = useContext(FavoritesContext);
-
   const API_KEY = '?api_key=7c572a9f5b3ba776080330d23bb76e1e';  
   const BASE_URL = 'https://api.themoviedb.org/3';
 
-  // Função para buscar os filmes populares, mais bem avaliados, etc.
   const fetchMovies = async () => {
     try {
       const popularURL = `${BASE_URL}/movie/popular${API_KEY}&language=pt-br&page=1`;
@@ -79,8 +75,6 @@ export default function Home() {
                 <MovieCard
                   key={movie.id}
                   {...movie}
-                  handleFavorite={handleFavorite}
-                  isFavorite={isFavorite(movie)}
                 />
               ))
             ) : (
@@ -94,8 +88,6 @@ export default function Home() {
               <MovieCard
                 key={movie.id}
                 {...movie}
-                handleFavorite={handleFavorite}
-                isFavorite={isFavorite(movie)}
               />
             ))}
           </ContainerMovies>
@@ -106,8 +98,6 @@ export default function Home() {
               <MovieCard
                 key={movie.id}
                 {...movie}
-                handleFavorite={handleFavorite}
-                isFavorite={isFavorite(movie)}
               />
             ))}
           </ContainerMovies>
@@ -118,8 +108,6 @@ export default function Home() {
               <MovieCard
                 key={movie.id}
                 {...movie}
-                handleFavorite={handleFavorite}
-                isFavorite={isFavorite(movie)}
               />
             ))}
           </ContainerMovies>

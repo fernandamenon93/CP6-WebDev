@@ -3,7 +3,7 @@ import MovieCard from '../components/MovieCard';
 import { WatchlistContext } from '../context/WatchlistContext';
 
 export default function Watchlist() {
-  const { watchlist, handleWatchlist, isInWatchlist } = useContext(WatchlistContext);
+  const { watchlist } = useContext(WatchlistContext);
 
   return (
     <div className="container mx-auto mt-8">
@@ -16,8 +16,6 @@ export default function Watchlist() {
             <MovieCard
               key={movie.id}
               {...movie}
-              handleFavorite={handleWatchlist} 
-              isFavorite={isInWatchlist(movie)} 
             />
           ))}
         </div>

@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import BotaoLogin from "./BotaoLogin";
 import { useState } from "react";
@@ -24,7 +23,6 @@ export default function Header(){
                             <li><NavLink to="/genre"  className={({ isActive }) => isActive ? 'text-black-300' : 'hover:text-gray-300'}>Gêneros</NavLink></li>
                             <li><NavLink to="/watchlistpage" className={({ isActive }) => isActive ? 'text-black-300' : 'hover:text-gray-300'}>Watchlist Page</NavLink></li>
                             <li><NavLink to="/watchedmoviespage" className={({ isActive }) => isActive ? 'text-black-300' : 'hover:text-gray-300'}>Watched Movies Page</NavLink></li>
-                            <li><NavLink to="/favorites" className={({ isActive }) => isActive ? 'text-black-300' : 'hover:text-gray-300'}>Meus Favoritos</NavLink></li>
                         </ul>
                     </nav>
                     <BotaoLogin isLogged={isLogged} handleLogin={handleLogin} />
